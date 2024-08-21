@@ -1,0 +1,58 @@
+.wrapper {
+  width: 400px;
+
+  background-color: #242424;
+}
+
+.container {
+  overflow: hidden;
+}
+
+/* Header */
+.menuList {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+/* Instructions */
+
+.instructionsList {
+  display: grid;
+  gap: 0.5em;
+}
+
+.instruction {
+  border-radius: 4px;
+  background-color: #4d4d4d;
+}
+
+.instructionButton {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+}
+
+/* Settings */
+
+.main {
+  position: relative;
+  padding: 0.5em;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background-color: #242424;
+  transition: right 0.2s;
+  padding: 0.5em;
+}
+
+.sidebarOpen {
+  right: 0;
+}
+/*  */
