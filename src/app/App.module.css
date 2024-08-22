@@ -16,6 +16,12 @@
   border-bottom: 1px solid #4d4d4d;
 }
 
+.gearIcon {
+  width: 20px;
+  height: 20px;
+  fill: #ffffffde;
+}
+
 /* Instructions */
 
 .instructionsList {
@@ -29,6 +35,8 @@
 }
 
 .instructionButton {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 0.5em;

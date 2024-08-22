@@ -1,3 +1,4 @@
+import { Icon } from '../components/icon/Icon'
 import cn from 'classnames'
 import { useState } from 'react'
 
@@ -31,7 +32,7 @@ function App() {
                   className={styles.instructionButton}
                   onClick={() => handleMenuClick('Settings')}
                 >
-                  Settings
+                  <Icon icon='gearIcon' className={styles.gearIcon} />
                 </button>
               </li>
             </ul>
