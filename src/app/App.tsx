@@ -1,4 +1,5 @@
-import { Icon } from '../components/icon/Icon'
+import { Button } from '../components/button/Button'
+import Header from '../sections/header/Header'
 import cn from 'classnames'
 import { useState } from 'react'
 
@@ -16,28 +17,7 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <header className={styles.header}>
-          <nav className={styles.nav}>
-            <ul className={styles.menuList}>
-              <li className={styles.instruction}>
-                <button
-                  className={styles.instructionButton}
-                  onClick={() => handleMenuClick('Instructions')}
-                >
-                  Instructions
-                </button>
-              </li>
-              <li className={styles.instruction}>
-                <button
-                  className={styles.instructionButton}
-                  onClick={() => handleMenuClick('Settings')}
-                >
-                  <Icon icon='gearIcon' className={styles.gearIcon} />
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </header>
+        <Header onMenuClick={handleMenuClick} />
 
         <main className={styles.main}>
           <section
@@ -50,19 +30,13 @@ function App() {
 
           <ul className={styles.instructionsList}>
             <li className={styles.instruction}>
-              <button className={styles.instructionButton}>
-                Translate to Russian
-              </button>
+              <Button>Translate to Russian</Button>
             </li>
             <li className={styles.instruction}>
-              <button className={styles.instructionButton}>
-                In development ...
-              </button>
+              <Button>In development ...</Button>
             </li>
             <li className={styles.instruction}>
-              <button className={styles.instructionButton}>
-                In development ...
-              </button>
+              <Button>In development ...</Button>
             </li>
           </ul>
 

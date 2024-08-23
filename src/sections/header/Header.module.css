@@ -1,0 +1,17 @@
+.menuList {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+.gearIcon {
+  width: 20px;
+  height: 20px;
+  fill: #ffffffde;
+}
+
+.instruction {
+  border-radius: 4px;
+  background-color: #4d4d4d;
+}

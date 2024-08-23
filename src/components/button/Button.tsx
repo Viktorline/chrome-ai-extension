@@ -23,7 +23,7 @@ export function Button({
   return (
     <>
       <button
-        className={cn(styles.button, className, {})}
+        className={cn(styles.default, className, {})}
         disabled={disabled || isLoading}
         {...props}
       >
