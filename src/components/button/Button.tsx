@@ -23,11 +23,11 @@ export function Button({
   return (
     <>
       <button
-        className={cn(styles.default, className, {})}
+        className={cn(styles.default, className)}
         disabled={disabled || isLoading}
         {...props}
       >
-        <div className={cn({ [styles.hidden]: isLoading })}>{children}</div>
+        {children}
         {/* {isLoading && <Icon icon='circleNotch' className={styles.spinner} />} */}
       </button>
       {hint && <span className={styles.hint}>{hint}</span>}

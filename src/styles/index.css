@@ -3,8 +3,8 @@
 
 :root {
   font-family: 'Roboto', sans-serif;
-  line-height: 1.5;
   font-weight: 400;
+  font-size: large;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
