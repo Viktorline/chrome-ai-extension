@@ -1,4 +1,3 @@
-import { Button } from '../components/button/Button'
 import Prompt from '../components/prompt/Prompt'
 import Editor from '../sections/editor/Editor'
 import Header from '../sections/header/Header'
@@ -47,7 +46,6 @@ function App() {
     setActiveSection('Editor')
   }
 
-  console.log(selectedPrompt)
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

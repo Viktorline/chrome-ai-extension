@@ -1,9 +1,11 @@
 .wrapper {
   width: 300px;
-  background-color: #242424;
+  height: 600px;
+  background-color: #706c6c;
 }
 
 .container {
+  height: 100%;
   overflow: hidden;
 }
 
@@ -16,14 +18,10 @@
   gap: 0.5em;
 }
 
-.prompt {
-  border-radius: 4px;
-  background-color: #4d4d4d;
-}
-
 /* list */
 
 .main {
+  height: 100%;
   position: relative;
   padding: 0.5em;
 }
@@ -55,4 +53,3 @@
 .leftOpen {
   left: 0;
 }
-/*  */

@@ -1,5 +1,6 @@
 import { Button } from '../../components/button/Button'
 import { useState } from 'react'
+import TextareaAutosize from 'react-textarea-autosize'
 
 import styles from './Editor.module.css'
 
@@ -23,15 +24,19 @@ function Editor({ id, title, instruction, onSave }: PromptProps) {
   return (
     <div className={styles.prompt}>
       <input
+        className={styles.input}
         type='text'
         value={editTitle}
         onChange={e => setEditTitle(e.target.value)}
         placeholder='Enter title'
       />
-      <textarea
+      <TextareaAutosize
+        className={styles.textarea}
         value={editInstruction}
         onChange={e => setEditInstruction(e.target.value)}
         placeholder='Enter instruction'
+        minRows={1}
+        maxRows={10}
       />
       <Button onClick={handleSave}>Save</Button>
     </div>
