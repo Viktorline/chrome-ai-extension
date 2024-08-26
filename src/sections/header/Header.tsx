@@ -10,11 +10,16 @@ type HeaderProps = {
 
 function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header>
+    <header className={styles.header}>
       <nav>
         <ul className={styles.menuList}>
           <li>
-            <Button onClick={() => onMenuClick('Prompts')}>Prompts</Button>
+            <Button
+              className={styles.promptButton}
+              onClick={() => onMenuClick('Prompts')}
+            >
+              Prompts
+            </Button>
           </li>
           <li>
             <Button onClick={() => onMenuClick('Settings')}>

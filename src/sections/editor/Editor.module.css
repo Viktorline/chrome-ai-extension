@@ -1,7 +1,7 @@
 .menuList {
   display: flex;
   justify-content: space-between;
-  padding: 0.5em;
+  padding: var(--padding);
   border-bottom: 1px solid #4d4d4d;
 }
 
@@ -13,12 +13,12 @@
 
 .prompt {
   display: grid;
-  gap: 0.5em;
+  gap: var(--padding);
 }
 
 .input,
 .textarea {
-  padding: 0.5em;
+  padding: var(--padding);
   border-radius: 4px;
   background-color: #4d4d4d;
 }

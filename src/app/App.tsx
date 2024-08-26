@@ -23,6 +23,51 @@ const PROMPTS_DATA = [
     id: 3,
     title: 'Explain',
     instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 4,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 5,
+    title: 'Translate to Russian',
+    instruction: 'Translate the selected text into Russian.'
+  },
+  {
+    id: 6,
+    title: 'Summarize Text',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 7,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 8,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 9,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 10,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 11,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+  {
+    id: 12,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
   }
 ]
 
