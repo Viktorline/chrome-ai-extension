@@ -13,18 +13,11 @@ export type PromptOwn = {
   instruction: string
 }
 
-const EMPTY_PROMPT = { id: -1, title: '', instruction: '' }
-
 function App() {
   const { prompts, addPrompt, loadPrompts, updatePrompt, deletePrompt } =
     usePromptStore()
-
-  const clearPrompts = prompts.filter(prompt => prompt.title.trim() !== '')
-
   const [activeSection, setActiveSection] = useState<Pages>('Prompts')
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptOwn | null>(
-    EMPTY_PROMPT
-  )
+  const [selectedPrompt, setSelectedPrompt] = useState<PromptOwn | null>(null)
 
   useEffect(() => {
     loadPrompts()
@@ -34,20 +27,8 @@ function App() {
     setActiveSection(page)
   }
 
-  const handleSave = (id: number, newTitle: string, newInstruction: string) => {
-    if (newTitle.trim() && newInstruction.trim()) {
-      updatePrompt(id, { id, title: newTitle, instruction: newInstruction })
-    } else {
-      deletePrompt(id)
-    }
-    setActiveSection('Prompts')
-  }
-
   const handleNewPrompt = () => {
-    const newId = Date.now()
-    const newPrompt = { id: newId, title: '', instruction: '' }
-    addPrompt(newPrompt)
-    setSelectedPrompt(newPrompt)
+    setSelectedPrompt(null)
     setActiveSection('Editor')
   }
 
@@ -56,12 +37,34 @@ function App() {
     setActiveSection('Editor')
   }
 
+  const handleReturn = () => {
+    setActiveSection('Prompts')
+  }
+
+  const handleSave = (id: number, newTitle: string, newInstruction: string) => {
+    const promptId = id !== null ? id : Date.now()
+    const promptData = {
+      id: promptId,
+      title: newTitle,
+      instruction: newInstruction
+    }
+
+    const existingPrompt = prompts.some(prompt => prompt.id === promptId)
+    if (existingPrompt) {
+      updatePrompt(promptId, promptData)
+    } else {
+      addPrompt(promptData)
+    }
+
+    setActiveSection('Prompts')
+  }
+
   const handleDeletePrompt = () => {
     if (selectedPrompt) {
       deletePrompt(selectedPrompt.id)
-      setSelectedPrompt(EMPTY_PROMPT)
-      setActiveSection('Prompts')
+      setSelectedPrompt(null)
     }
+    setActiveSection('Prompts')
   }
 
   return (
@@ -74,11 +77,12 @@ function App() {
           activeSection={activeSection}
         />
         <Main
-          promptsData={clearPrompts}
+          promptsData={prompts}
           activeSection={activeSection}
           selectedPrompt={selectedPrompt}
           onPromptClick={handlePromptClick}
           onSave={handleSave}
+          onReturn={handleReturn}
         />
       </div>
     </div>

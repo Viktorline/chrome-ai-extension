@@ -11,6 +11,7 @@ type MainProps = {
   selectedPrompt: PromptOwn | null
   onPromptClick: (prompt: PromptOwn) => void
   onSave: (id: number, newTitle: string, newInstruction: string) => void
+  onReturn: () => void
 }
 
 function Main({
@@ -18,6 +19,7 @@ function Main({
   activeSection,
   selectedPrompt,
   onPromptClick,
+  onReturn,
   onSave
 }: MainProps) {
   return (
@@ -38,15 +40,14 @@ function Main({
           [styles.leftOpen]: activeSection === 'Editor'
         })}
       >
-        {selectedPrompt !== null && (
-          <Editor
-            key={selectedPrompt.id}
-            id={selectedPrompt.id}
-            title={selectedPrompt.title}
-            instruction={selectedPrompt.instruction}
-            onSave={onSave}
-          />
-        )}
+        <Editor
+          key={selectedPrompt ? selectedPrompt.id : ''}
+          id={selectedPrompt ? selectedPrompt.id : -1}
+          title={selectedPrompt ? selectedPrompt.title : ''}
+          instruction={selectedPrompt ? selectedPrompt.instruction : ''}
+          onSave={onSave}
+          onReturn={onReturn}
+        />
       </section>
 
       <section
