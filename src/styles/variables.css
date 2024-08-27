@@ -1,0 +1,8 @@
+:root {
+  --color-background-dark: #242424;
+  --color-text-dark: #ffffffde;
+  --color-element-dark: #4d4d4d;
+  --color-element-dark-hover: #3d3d3d;
+
+  --border-radius: 4px;
+}

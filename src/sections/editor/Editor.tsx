@@ -36,7 +36,7 @@ function Editor({ id, title, instruction, onSave }: PromptProps) {
         onChange={e => setEditInstruction(e.target.value)}
         placeholder='Enter instruction'
         minRows={1}
-        maxRows={19}
+        maxRows={27}
       />
       <Button onClick={handleSave}>Save</Button>
     </div>

@@ -1,7 +1,5 @@
-import Prompt from '../components/prompt/Prompt'
-import Editor from '../sections/editor/Editor'
 import Header from '../sections/header/Header'
-import cn from 'classnames'
+import Main from '../sections/main/Main'
 import { useState } from 'react'
 
 import styles from './App.module.css'
@@ -68,6 +66,30 @@ const PROMPTS_DATA = [
     id: 12,
     title: 'Explain',
     instruction: 'Blablablablablablabla'
+  },
+
+  {
+    id: 13,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+
+  {
+    id: 14,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+
+  {
+    id: 15,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
+  },
+
+  {
+    id: 16,
+    title: 'Explain',
+    instruction: 'Blablablablablablabla'
   }
 ]
 
@@ -95,43 +117,13 @@ function App() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Header onMenuClick={handleMenuClick} />
-
-        <main className={styles.main}>
-          <ul className={styles.promptsList}>
-            {PROMPTS_DATA.map(prompt => (
-              <Prompt
-                key={prompt.id}
-                id={prompt.id}
-                title={prompt.title}
-                onClick={() => handlePromptClick(prompt.id)}
-              />
-            ))}
-          </ul>
-
-          <section
-            className={cn(styles.sidebar, styles.left, {
-              [styles.leftOpen]: activeSection === 'Editor'
-            })}
-          >
-            {selectedPrompt !== null && (
-              <Editor
-                key={selectedPrompt}
-                id={PROMPTS_DATA[selectedPrompt! - 1].id}
-                title={PROMPTS_DATA[selectedPrompt! - 1].title}
-                instruction={PROMPTS_DATA[selectedPrompt! - 1].instruction}
-                onSave={handleSave}
-              />
-            )}
-          </section>
-
-          <section
-            className={cn(styles.sidebar, styles.right, {
-              [styles.rightOpen]: activeSection === 'Settings'
-            })}
-          >
-            <div>Settings Content</div>
-          </section>
-        </main>
+        <Main
+          promptsData={PROMPTS_DATA}
+          activeSection={activeSection}
+          selectedPrompt={selectedPrompt}
+          onPromptClick={handlePromptClick}
+          onSave={handleSave}
+        />
       </div>
     </div>
   )

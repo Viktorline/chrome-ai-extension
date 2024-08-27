@@ -1,16 +1,3 @@
-.menuList {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--padding);
-  border-bottom: 1px solid #4d4d4d;
-}
-
-.gearIcon {
-  width: 20px;
-  height: 20px;
-  fill: #ffffffde;
-}
-
 .prompt {
   display: grid;
   gap: var(--padding);
@@ -19,8 +6,8 @@
 .input,
 .textarea {
   padding: var(--padding);
-  border-radius: 4px;
-  background-color: #4d4d4d;
+  border-radius: var(--border-radius);
+  background-color: var(--color-element-dark);
 }
 
 .textarea {
