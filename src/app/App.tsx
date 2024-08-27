@@ -1,124 +1,80 @@
 import Header from '../sections/header/Header'
 import Main from '../sections/main/Main'
-import { useState } from 'react'
+import { usePromptStore } from '../store/usePromptStore'
+import { useEffect, useState } from 'react'
 
 import styles from './App.module.css'
 
 export type Pages = 'Prompts' | 'Settings' | 'Editor'
 
-const PROMPTS_DATA = [
-  {
-    id: 1,
-    title: 'Translate to Russian',
-    instruction: 'Translate the selected text into Russian.'
-  },
-  {
-    id: 2,
-    title: 'Summarize Text',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 3,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 4,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 5,
-    title: 'Translate to Russian',
-    instruction: 'Translate the selected text into Russian.'
-  },
-  {
-    id: 6,
-    title: 'Summarize Text',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 7,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 8,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 9,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 10,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 11,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-  {
-    id: 12,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
+export type PromptOwn = {
+  id: number
+  title: string
+  instruction: string
+}
 
-  {
-    id: 13,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-
-  {
-    id: 14,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-
-  {
-    id: 15,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  },
-
-  {
-    id: 16,
-    title: 'Explain',
-    instruction: 'Blablablablablablabla'
-  }
-]
+const EMPTY_PROMPT = { id: -1, title: '', instruction: '' }
 
 function App() {
+  const { prompts, addPrompt, loadPrompts, updatePrompt, deletePrompt } =
+    usePromptStore()
+
+  const clearPrompts = prompts.filter(prompt => prompt.title.trim() !== '')
+
   const [activeSection, setActiveSection] = useState<Pages>('Prompts')
-  const [selectedPrompt, setSelectedPrompt] = useState<number | null>(null)
+  const [selectedPrompt, setSelectedPrompt] = useState<PromptOwn | null>(
+    EMPTY_PROMPT
+  )
+
+  useEffect(() => {
+    loadPrompts()
+  }, [loadPrompts])
 
   const handleMenuClick = (page: Pages) => {
     setActiveSection(page)
   }
 
   const handleSave = (id: number, newTitle: string, newInstruction: string) => {
-    console.log(
-      `Prompt ${id} saved with title: ${newTitle} and instruction: ${newInstruction}`
-    )
+    if (newTitle.trim() && newInstruction.trim()) {
+      updatePrompt(id, { id, title: newTitle, instruction: newInstruction })
+    } else {
+      deletePrompt(id)
+    }
     setActiveSection('Prompts')
   }
 
-  const handlePromptClick = (id: number) => {
-    setSelectedPrompt(id)
+  const handleNewPrompt = () => {
+    const newId = Date.now()
+    const newPrompt = { id: newId, title: '', instruction: '' }
+    addPrompt(newPrompt)
+    setSelectedPrompt(newPrompt)
     setActiveSection('Editor')
+  }
+
+  const handlePromptClick = (prompt: PromptOwn) => {
+    setSelectedPrompt(prompt)
+    setActiveSection('Editor')
+  }
+
+  const handleDeletePrompt = () => {
+    if (selectedPrompt) {
+      deletePrompt(selectedPrompt.id)
+      setSelectedPrompt(EMPTY_PROMPT)
+      setActiveSection('Prompts')
+    }
   }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Header onMenuClick={handleMenuClick} />
+        <Header
+          onMenuClick={handleMenuClick}
+          onNewPrompt={handleNewPrompt}
+          onDeletePrompt={handleDeletePrompt}
+          activeSection={activeSection}
+        />
         <Main
-          promptsData={PROMPTS_DATA}
+          promptsData={clearPrompts}
           activeSection={activeSection}
           selectedPrompt={selectedPrompt}
           onPromptClick={handlePromptClick}

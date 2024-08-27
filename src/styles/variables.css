@@ -5,4 +5,7 @@
   --color-element-dark-hover: #3d3d3d;
 
   --border-radius: 4px;
+
+  --transition: 0.1s;
+  --padding: 8px;
 }

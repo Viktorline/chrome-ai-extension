@@ -3,8 +3,6 @@ import IconsProps from '../Icons.props'
 export function GearIcon(props: IconsProps) {
   return (
     <svg
-      version='1.1'
-      id='Capa_1'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 45.973 45.973'
       {...props}

@@ -1,4 +1,4 @@
-import { Pages } from '../../app/App'
+import { Pages, PromptOwn } from '../../app/App'
 import Prompt from '../../components/prompt/Prompt'
 import Editor from '../../sections/editor/Editor'
 import cn from 'classnames'
@@ -8,8 +8,8 @@ import styles from './Main.module.css'
 type MainProps = {
   promptsData: Array<{ id: number; title: string; instruction: string }>
   activeSection: Pages
-  selectedPrompt: number | null
-  onPromptClick: (id: number) => void
+  selectedPrompt: PromptOwn | null
+  onPromptClick: (prompt: PromptOwn) => void
   onSave: (id: number, newTitle: string, newInstruction: string) => void
 }
 
@@ -28,7 +28,7 @@ function Main({
             key={prompt.id}
             id={prompt.id}
             title={prompt.title}
-            onClick={() => onPromptClick(prompt.id)}
+            onClick={() => onPromptClick(prompt)}
           />
         ))}
       </ul>
@@ -40,10 +40,10 @@ function Main({
       >
         {selectedPrompt !== null && (
           <Editor
-            key={selectedPrompt}
-            id={promptsData[selectedPrompt! - 1].id}
-            title={promptsData[selectedPrompt! - 1].title}
-            instruction={promptsData[selectedPrompt! - 1].instruction}
+            key={selectedPrompt.id}
+            id={selectedPrompt.id}
+            title={selectedPrompt.title}
+            instruction={selectedPrompt.instruction}
             onSave={onSave}
           />
         )}

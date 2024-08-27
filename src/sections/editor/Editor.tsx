@@ -8,7 +8,7 @@ type PromptProps = {
   id: number
   title: string
   instruction: string
-  onSave?: (id: number, newTitle: string, newInstruction: string) => void
+  onSave: (id: number, newTitle: string, newInstruction: string) => void
 }
 
 function Editor({ id, title, instruction, onSave }: PromptProps) {
@@ -16,10 +16,10 @@ function Editor({ id, title, instruction, onSave }: PromptProps) {
   const [editInstruction, setEditInstruction] = useState(instruction)
 
   const handleSave = () => {
-    if (onSave) {
-      onSave(id, editTitle, editInstruction)
-    }
+    onSave(id, editTitle, editInstruction)
   }
+
+  const isModified = editTitle !== title || editInstruction !== instruction
 
   return (
     <div className={styles.prompt}>
@@ -38,7 +38,7 @@ function Editor({ id, title, instruction, onSave }: PromptProps) {
         minRows={1}
         maxRows={27}
       />
-      <Button onClick={handleSave}>Save</Button>
+      <Button onClick={handleSave}> {isModified ? 'Save' : 'Return'}</Button>
     </div>
   )
 }

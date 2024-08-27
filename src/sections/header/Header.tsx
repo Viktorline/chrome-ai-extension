@@ -6,20 +6,31 @@ import styles from './Header.module.css'
 
 type HeaderProps = {
   onMenuClick: (page: Pages) => void
+  onNewPrompt: () => void
+  onDeletePrompt: () => void
+  activeSection: Pages
 }
 
-function Header({ onMenuClick }: HeaderProps) {
+function Header({
+  onMenuClick,
+  onNewPrompt,
+  onDeletePrompt,
+  activeSection
+}: HeaderProps) {
   return (
     <header className={styles.header}>
       <nav>
         <ul className={styles.menuList}>
           <li>
-            <Button
-              className={styles.promptButton}
-              onClick={() => onMenuClick('Prompts')}
-            >
-              Prompts
-            </Button>
+            {activeSection === 'Editor' ? (
+              <Button onClick={onDeletePrompt}>
+                <Icon icon='trashIcon' className={styles.gearIcon} />
+              </Button>
+            ) : (
+              <Button onClick={onNewPrompt}>
+                <Icon icon='plusIcon' className={styles.gearIcon} />
+              </Button>
+            )}
           </li>
           <li>
             <Button onClick={() => onMenuClick('Settings')}>

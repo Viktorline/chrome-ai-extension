@@ -6,7 +6,7 @@
   padding: var(--padding);
   border-radius: var(--border-radius);
   background-color: var(--color-element-dark);
-  transition: 0.1s background-color;
+  transition: var(--transition) background-color;
 }
 
 @media (hover: hover) {
