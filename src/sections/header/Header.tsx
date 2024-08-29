@@ -1,6 +1,5 @@
 import { Pages } from '../../app/App'
 import { Button } from '../../components/button/Button'
-import { Icon } from '../../components/icon/Icon'
 
 import styles from './Header.module.css'
 
@@ -23,19 +22,13 @@ function Header({
         <ul className={styles.menuList}>
           <li>
             {activeSection === 'Editor' ? (
-              <Button onClick={onDeletePrompt}>
-                <Icon icon='trashIcon' className={styles.gearIcon} />
-              </Button>
+              <Button onClick={onDeletePrompt} icon='trashIcon' />
             ) : (
-              <Button onClick={onNewPrompt}>
-                <Icon icon='plusIcon' className={styles.gearIcon} />
-              </Button>
+              <Button onClick={onNewPrompt} icon='plusIcon' />
             )}
           </li>
           <li>
-            <Button onClick={() => onMenuClick('Settings')}>
-              <Icon icon='gearIcon' className={styles.gearIcon} />
-            </Button>
+            <Button onClick={() => onMenuClick('Settings')} icon='gearIcon' />
           </li>
         </ul>
       </nav>

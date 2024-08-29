@@ -1,3 +1,4 @@
+import { Icon, IconName } from '../icon/Icon'
 import cn from 'classnames'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
@@ -9,7 +10,7 @@ export interface ButtonProps
     HTMLButtonElement
   > {
   isLoading?: boolean
-  hint?: string
+  icon?: IconName
 }
 
 export function Button({
@@ -17,7 +18,7 @@ export function Button({
   className,
   disabled,
   isLoading,
-  hint,
+  icon,
   ...props
 }: ButtonProps) {
   return (
@@ -27,10 +28,9 @@ export function Button({
         disabled={disabled || isLoading}
         {...props}
       >
-        {children}
-        {/* {isLoading && <Icon icon='circleNotch' className={styles.spinner} />} */}
+        {children && <span className={styles.text}>{children}</span>}
+        {icon && <Icon icon={icon} className={styles.icon} />}
       </button>
-      {hint && <span className={styles.hint}>{hint}</span>}
     </>
   )
 }

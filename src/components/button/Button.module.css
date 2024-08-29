@@ -9,6 +9,17 @@
   transition: var(--transition) background-color;
 }
 
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-text-dark);
+}
+
 @media (hover: hover) {
   .default:hover {
     background-color: var(--color-element-dark-hover);

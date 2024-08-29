@@ -2,7 +2,7 @@ import { GearIcon } from './icons/GearIcon'
 import { PlusIcon } from './icons/PlusIcon'
 import { TrashIcon } from './icons/TrashIcon'
 
-type IconName = 'gearIcon' | 'plusIcon' | 'trashIcon'
+export type IconName = 'gearIcon' | 'plusIcon' | 'trashIcon'
 
 type IconProps = {
   icon: IconName
