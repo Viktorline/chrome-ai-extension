@@ -42,7 +42,7 @@ function App() {
   }
 
   const handleSave = (id: number, newTitle: string, newInstruction: string) => {
-    const promptId = id !== null ? id : Date.now()
+    const promptId = id !== -1 ? id : Date.now()
     const promptData = {
       id: promptId,
       title: newTitle,
@@ -54,6 +54,7 @@ function App() {
       updatePrompt(promptId, promptData)
     } else {
       addPrompt(promptData)
+      setSelectedPrompt(promptData)
     }
 
     setActiveSection('Prompts')
@@ -71,18 +72,18 @@ function App() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <Header
+          activeSection={activeSection}
           onMenuClick={handleMenuClick}
           onNewPrompt={handleNewPrompt}
           onDeletePrompt={handleDeletePrompt}
-          activeSection={activeSection}
         />
         <Main
           promptsData={prompts}
           activeSection={activeSection}
           selectedPrompt={selectedPrompt}
           onPromptClick={handlePromptClick}
-          onSave={handleSave}
           onReturn={handleReturn}
+          onSave={handleSave}
         />
       </div>
     </div>

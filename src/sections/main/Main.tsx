@@ -2,6 +2,7 @@ import { Pages, PromptOwn } from '../../app/App'
 import Prompt from '../../components/prompt/Prompt'
 import Editor from '../../sections/editor/Editor'
 import cn from 'classnames'
+import { useEffect, useState } from 'react'
 
 import styles from './Main.module.css'
 
