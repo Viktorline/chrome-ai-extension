@@ -25,6 +25,8 @@ function Editor({ id, title, instruction, onSave, onReturn }: PromptProps) {
   return (
     <div className={styles.prompt}>
       <input
+        id='edit-title'
+        name='title'
         className={styles.input}
         type='text'
         value={editTitle}
@@ -32,6 +34,8 @@ function Editor({ id, title, instruction, onSave, onReturn }: PromptProps) {
         placeholder='Enter title'
       />
       <TextareaAutosize
+        id='edit-instruction'
+        name='instruction'
         className={styles.textarea}
         value={editInstruction}
         onChange={e => setEditInstruction(e.target.value)}

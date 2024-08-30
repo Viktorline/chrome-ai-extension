@@ -1,8 +1,9 @@
 import { GearIcon } from './icons/GearIcon'
 import { PlusIcon } from './icons/PlusIcon'
+import { ReturnIcon } from './icons/ReturnIcon'
 import { TrashIcon } from './icons/TrashIcon'
 
-export type IconName = 'gearIcon' | 'plusIcon' | 'trashIcon'
+export type IconName = 'gearIcon' | 'plusIcon' | 'trashIcon' | 'returnIcon'
 
 type IconProps = {
   icon: IconName
@@ -12,7 +13,8 @@ type IconProps = {
 const icons = {
   gearIcon: GearIcon,
   plusIcon: PlusIcon,
-  trashIcon: TrashIcon
+  trashIcon: TrashIcon,
+  returnIcon: ReturnIcon
 }
 
 export function Icon({ icon, className, ...props }: IconProps) {

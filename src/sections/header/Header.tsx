@@ -4,14 +4,16 @@ import { Button } from '../../components/button/Button'
 import styles from './Header.module.css'
 
 type HeaderProps = {
-  onMenuClick: (page: Pages) => void
+  onReturn: () => void
+  onSettings: () => void
   onNewPrompt: () => void
   onDeletePrompt: () => void
   activeSection: Pages
 }
 
 function Header({
-  onMenuClick,
+  onReturn,
+  onSettings,
   onNewPrompt,
   onDeletePrompt,
   activeSection
@@ -28,7 +30,11 @@ function Header({
             )}
           </li>
           <li>
-            <Button onClick={() => onMenuClick('Settings')} icon='gearIcon' />
+            {activeSection === 'Settings' ? (
+              <Button onClick={onReturn} icon='returnIcon' />
+            ) : (
+              <Button onClick={onSettings} icon='gearIcon' />
+            )}
           </li>
         </ul>
       </nav>

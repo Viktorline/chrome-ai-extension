@@ -23,8 +23,8 @@ function App() {
     loadPrompts()
   }, [loadPrompts])
 
-  const handleMenuClick = (page: Pages) => {
-    setActiveSection(page)
+  const handleToSettings = () => {
+    setActiveSection('Settings')
   }
 
   const handleNewPrompt = () => {
@@ -56,7 +56,6 @@ function App() {
       addPrompt(promptData)
       setSelectedPrompt(promptData)
     }
-
     setActiveSection('Prompts')
   }
 
@@ -73,9 +72,10 @@ function App() {
       <div className={styles.container}>
         <Header
           activeSection={activeSection}
-          onMenuClick={handleMenuClick}
+          onSettings={handleToSettings}
           onNewPrompt={handleNewPrompt}
           onDeletePrompt={handleDeletePrompt}
+          onReturn={handleReturn}
         />
         <Main
           promptsData={prompts}
