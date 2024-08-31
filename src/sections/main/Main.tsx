@@ -1,5 +1,6 @@
 import { Pages, PromptOwn } from '../../app/App'
 import Prompt from '../../components/prompt/Prompt'
+import { EN_PAGE_EDITOR, EN_PAGE_SETTINGS } from '../../constants/text'
 import Editor from '../../sections/editor/Editor'
 import cn from 'classnames'
 
@@ -37,7 +38,7 @@ function Main({
 
       <section
         className={cn(styles.sidebar, styles.left, {
-          [styles.leftOpen]: activeSection === 'Editor'
+          [styles.leftOpen]: activeSection === EN_PAGE_EDITOR
         })}
       >
         <Editor
@@ -52,7 +53,7 @@ function Main({
 
       <section
         className={cn(styles.sidebar, styles.right, {
-          [styles.rightOpen]: activeSection === 'Settings'
+          [styles.rightOpen]: activeSection === EN_PAGE_SETTINGS
         })}
       >
         <div>Settings Content</div>

@@ -1,3 +1,8 @@
+import {
+  EN_PAGE_EDITOR,
+  EN_PAGE_PROMPTS,
+  EN_PAGE_SETTINGS
+} from '../constants/text'
 import Header from '../sections/header/Header'
 import Main from '../sections/main/Main'
 import { usePromptStore } from '../store/usePromptStore'
@@ -5,7 +10,10 @@ import { useEffect, useState } from 'react'
 
 import styles from './App.module.css'
 
-export type Pages = 'Prompts' | 'Settings' | 'Editor'
+export type Pages =
+  | typeof EN_PAGE_PROMPTS
+  | typeof EN_PAGE_SETTINGS
+  | typeof EN_PAGE_EDITOR
 
 export type PromptOwn = {
   id: number
@@ -16,7 +24,7 @@ export type PromptOwn = {
 function App() {
   const { prompts, addPrompt, loadPrompts, updatePrompt, deletePrompt } =
     usePromptStore()
-  const [activeSection, setActiveSection] = useState<Pages>('Prompts')
+  const [activeSection, setActiveSection] = useState<Pages>(EN_PAGE_PROMPTS)
   const [selectedPrompt, setSelectedPrompt] = useState<PromptOwn | null>(null)
 
   useEffect(() => {
@@ -24,21 +32,21 @@ function App() {
   }, [loadPrompts])
 
   const handleToSettings = () => {
-    setActiveSection('Settings')
+    setActiveSection(EN_PAGE_SETTINGS)
   }
 
   const handleNewPrompt = () => {
     setSelectedPrompt(null)
-    setActiveSection('Editor')
+    setActiveSection(EN_PAGE_EDITOR)
   }
 
   const handlePromptClick = (prompt: PromptOwn) => {
     setSelectedPrompt(prompt)
-    setActiveSection('Editor')
+    setActiveSection(EN_PAGE_EDITOR)
   }
 
   const handleReturn = () => {
-    setActiveSection('Prompts')
+    setActiveSection(EN_PAGE_PROMPTS)
   }
 
   const handleSave = (id: number, newTitle: string, newInstruction: string) => {
@@ -56,7 +64,7 @@ function App() {
       addPrompt(promptData)
       setSelectedPrompt(promptData)
     }
-    setActiveSection('Prompts')
+    setActiveSection(EN_PAGE_PROMPTS)
   }
 
   const handleDeletePrompt = () => {
@@ -64,7 +72,7 @@ function App() {
       deletePrompt(selectedPrompt.id)
       setSelectedPrompt(null)
     }
-    setActiveSection('Prompts')
+    setActiveSection(EN_PAGE_PROMPTS)
   }
 
   return (

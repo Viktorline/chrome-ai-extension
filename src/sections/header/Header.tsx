@@ -1,5 +1,6 @@
 import { Pages } from '../../app/App'
 import { Button } from '../../components/button/Button'
+import { EN_PAGE_EDITOR, EN_PAGE_SETTINGS } from '../../constants/text'
 
 import styles from './Header.module.css'
 
@@ -23,14 +24,14 @@ function Header({
       <nav>
         <ul className={styles.menuList}>
           <li>
-            {activeSection === 'Editor' ? (
+            {activeSection === EN_PAGE_EDITOR ? (
               <Button onClick={onDeletePrompt} icon='trashIcon' />
             ) : (
               <Button onClick={onNewPrompt} icon='plusIcon' />
             )}
           </li>
           <li>
-            {activeSection === 'Settings' ? (
+            {activeSection === EN_PAGE_SETTINGS ? (
               <Button onClick={onReturn} icon='returnIcon' />
             ) : (
               <Button onClick={onSettings} icon='gearIcon' />
