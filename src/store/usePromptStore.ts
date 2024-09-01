@@ -26,7 +26,7 @@ export const usePromptStore = create<PromptState>(set => ({
     chrome.storage.local.get('commands', result => {
       const commands = result.commands || []
       set({ prompts: commands })
-      // alert('loaded from Chrome: ' + JSON.stringify(commands))
+      alert('loaded from Chrome: ' + JSON.stringify(commands))
     })
   },
 

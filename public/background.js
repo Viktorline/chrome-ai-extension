@@ -40,13 +40,21 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
   }
 })
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener(info => {
   if (info.menuItemId.startsWith('command-')) {
     const commandId = parseInt(info.menuItemId.replace('command-', ''), 10)
+
     chrome.storage.local.get('commands', result => {
       const command = result.commands.find(cmd => cmd.id === commandId)
       if (command) {
-        console.log('Poehali' + command.instruction)
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+          chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'showCommandPopup',
+            command: command.instruction,
+            x: info.pageX,
+            y: info.pageY
+          })
+        })
       }
     })
   }
