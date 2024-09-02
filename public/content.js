@@ -1,5 +1,13 @@
 console.log('content.js started')
 
+let mouseX = 0
+let mouseY = 0
+
+document.addEventListener('mousemove', event => {
+  mouseX = event.pageX
+  mouseY = event.pageY
+})
+
 chrome.runtime.onMessage.addListener(request => {
   if (request.action === 'showCommandPopup') {
     const { command, x, y } = request
@@ -11,9 +19,9 @@ chrome.runtime.onMessage.addListener(request => {
 
     const popup = document.createElement('div')
     popup.id = 'command-popup'
-    popup.style.position = 'absolute'
-    popup.style.left = `${x}px`
-    popup.style.top = `${y}px`
+    popup.style.position = 'fixed'
+    popup.style.left = `${mouseX}px`
+    popup.style.top = `${mouseY}px`
     popup.style.backgroundColor = '#333'
     popup.style.color = '#fff'
     popup.style.padding = '10px'
