@@ -4,6 +4,7 @@ import { useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
 import styles from './Editor.module.css'
+import React from 'react'
 
 type PromptProps = {
   id: number

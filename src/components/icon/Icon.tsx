@@ -1,3 +1,4 @@
+import React from 'react'
 import { GearIcon } from './icons/GearIcon'
 import { PlusIcon } from './icons/PlusIcon'
 import { ReturnIcon } from './icons/ReturnIcon'

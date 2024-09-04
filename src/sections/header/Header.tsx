@@ -1,3 +1,4 @@
+import React from 'react'
 import { Pages } from '../../app/App'
 import { Button } from '../../components/button/Button'
 import { EN_PAGE_EDITOR, EN_PAGE_SETTINGS } from '../../constants/text'

@@ -1,3 +1,4 @@
+import React from 'react'
 import styles from './Popup.module.css'
 
 export interface PopupProps {
@@ -7,8 +8,8 @@ export interface PopupProps {
 export function Popup({ text, ...props }: PopupProps) {
   return (
     <>
-      <div className={styles.wrapper} {...props}>
-        <span className={styles.text}>{text}</span>
+      <div>
+        <span>{text}</span>
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import Editor from '../../sections/editor/Editor'
 import cn from 'classnames'
 
 import styles from './Main.module.css'
+import React from 'react'
 
 type MainProps = {
   promptsData: Array<{ id: number; title: string; instruction: string }>

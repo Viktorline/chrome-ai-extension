@@ -1,30 +1,39 @@
-;(() => {
-  console.log('content.js started')
+import React from 'react'
+import { Popup } from './components/popup/Popup'
+import { createRoot } from 'react-dom/client'
 
-  async function renderCommandPopup(command: string, x: number, y: number) {
-    const { Popup } = await import('./components/popup/Popup')
-    const { createRoot } = await import('react-dom/client')
+alert('content.js started')
 
-    const existingPopup = document.getElementById('command-popup')
-    if (existingPopup) {
-      existingPopup.remove()
-    }
+let mouseX = 0
+let mouseY = 0
 
-    const container = document.createElement('div')
-    container.id = 'command-popup'
-    container.style.position = 'absolute'
-    container.style.left = `${x}px`
-    container.style.top = `${y}px`
-    document.body.appendChild(container)
+document.addEventListener('mousemove', event => {
+  mouseX = event.pageX
+  mouseY = event.pageY
+})
 
-    const root = createRoot(container)
-    root.render(<Popup text={command} />)
+function renderCommandPopup(command: string) {
+  const existingPopup = document.getElementById('command-popup')
+  if (existingPopup) {
+    existingPopup.remove()
   }
 
-  chrome.runtime.onMessage.addListener(request => {
-    if (request.action === 'showCommandPopup') {
-      const { command } = request
-      renderCommandPopup(command, 100, 100)
-    }
-  })
-})()
+  const container = document.createElement('div')
+  container.id = 'command-popup'
+  container.style.position = 'absolute'
+  container.style.left = `${mouseX}px`
+  container.style.top = `${mouseY}px`
+  document.body.appendChild(container)
+
+  const root = createRoot(container)
+  root.render(<Popup text={command} />)
+}
+
+chrome.runtime.onMessage.addListener(async request => {
+  if (request.action === 'showCommandPopup') {
+    const { command } = request;
+    renderCommandPopup(command);
+  }
+});
+
+export {};

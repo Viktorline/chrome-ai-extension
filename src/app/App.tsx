@@ -9,6 +9,7 @@ import { usePromptStore } from '../store/usePromptStore'
 import { useEffect, useState } from 'react'
 
 import styles from './App.module.css'
+import React from 'react'
 
 export type Pages =
   | typeof EN_PAGE_PROMPTS
@@ -57,7 +58,7 @@ function App() {
       instruction: newInstruction
     }
 
-    const existingPrompt = prompts.some(prompt => prompt.id === promptId)
+    const existingPrompt = prompts.some((prompt: { id: number }) => prompt.id === promptId)
     if (existingPrompt) {
       updatePrompt(promptId, promptData)
     } else {

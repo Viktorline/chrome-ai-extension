@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
 import styles from './Button.module.css'
+import React from 'react'
 
 export interface ButtonProps
   extends DetailedHTMLProps<

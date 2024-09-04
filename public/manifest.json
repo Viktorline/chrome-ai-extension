@@ -18,9 +18,11 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"],
       "type": "module"
+
     }
   ],
+
   "permissions": ["storage", "contextMenus"],
 
-  "host_permissions": ["http://*/*", "https://*/*"]
+  "host_permissions": ["<all_urls>"]
 }
