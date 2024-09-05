@@ -1,4 +1,5 @@
 import React from 'react'
+
 import IconsProps from '../Icons.props'
 
 export function GearIcon(props: IconsProps) {

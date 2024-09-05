@@ -1,8 +1,8 @@
-import React from 'react'
 import { Popup } from './components/popup/Popup'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-alert('content.js started')
+console.log('content.js started')
 
 let mouseX = 0
 let mouseY = 0
@@ -31,9 +31,9 @@ function renderCommandPopup(command: string) {
 
 chrome.runtime.onMessage.addListener(async request => {
   if (request.action === 'showCommandPopup') {
-    const { command } = request;
-    renderCommandPopup(command);
+    const { command } = request
+    renderCommandPopup(command)
   }
-});
+})
 
-export {};
+export {}

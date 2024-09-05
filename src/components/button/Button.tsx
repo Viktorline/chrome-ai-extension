@@ -1,9 +1,9 @@
 import { Icon, IconName } from '../icon/Icon'
 import cn from 'classnames'
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
-
-import styles from './Button.module.css'
 import React from 'react'
+
+import './Button.css'
 
 export interface ButtonProps
   extends DetailedHTMLProps<
@@ -25,12 +25,12 @@ export function Button({
   return (
     <>
       <button
-        className={cn(styles.default, className)}
+        className={cn('default', className)}
         disabled={disabled || isLoading}
         {...props}
       >
-        {children && <span className={styles.text}>{children}</span>}
-        {icon && <Icon icon={icon} className={styles.icon} />}
+        {children && <span className='text'>{children}</span>}{' '}
+        {icon && <Icon icon={icon} className='icon' />}
       </button>
     </>
   )

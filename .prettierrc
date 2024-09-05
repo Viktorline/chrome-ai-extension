@@ -10,7 +10,7 @@
     "<THIRD_PARTY_MODULES>",
     "(^@/components)|(^@/layouts)|(^@/constants)|(^@/content)|(^@/hooks)|(^@/http)|(^@/services)|(^@/store)|(^@/utils)|(^@/views)",
     "(^@/models)|(^@/props)|(.props$)",
-    ".module.css$"
+    ".css$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,

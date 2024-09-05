@@ -1,55 +1,44 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'development',
   entry: {
-    content: './src/content.tsx',  
-    // main: './index.html',
-
+    main: './src/index.tsx',
+    content: './src/content.tsx'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
-  },
-  externals: {
-    './background.js': 'commonjs ./background.js',
+    clean: true
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
-        test: /\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false, 
-            },
-          },
-          'css-loader',
-        ],
-      },
-    ],
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        exclude: /node_modules/
+      }
+    ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].css'
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: 'public', to: '.' } 
-      ],
-    }),
+      patterns: [{ from: 'public', to: '.' }]
+    })
   ],
-
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js']
   },
-  devtool: 'source-map',
-};
+  devtool: 'source-map'
+}

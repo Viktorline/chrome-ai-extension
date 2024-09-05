@@ -1,10 +1,10 @@
 import { Button } from '../../components/button/Button'
 import { EN_EDITOR_PROMPT, EN_EDITOR_TITLE } from '../../constants/text'
 import { useState } from 'react'
+import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
-import styles from './Editor.module.css'
-import React from 'react'
+import './Editor.css'
 
 type PromptProps = {
   id: number
@@ -25,11 +25,11 @@ function Editor({ id, title, instruction, onSave, onReturn }: PromptProps) {
   }
 
   return (
-    <div className={styles.prompt}>
+    <div className='prompt'>
       <input
         id='edit-title'
         name='title'
-        className={styles.input}
+        className='input'
         type='text'
         value={editTitle}
         onChange={e => setEditTitle(e.target.value)}
@@ -38,7 +38,7 @@ function Editor({ id, title, instruction, onSave, onReturn }: PromptProps) {
       <TextareaAutosize
         id='edit-instruction'
         name='prompt'
-        className={styles.textarea}
+        className='textarea'
         value={editInstruction}
         onChange={e => setEditInstruction(e.target.value)}
         placeholder={EN_EDITOR_PROMPT}

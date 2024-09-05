@@ -7,9 +7,9 @@ import Header from '../sections/header/Header'
 import Main from '../sections/main/Main'
 import { usePromptStore } from '../store/usePromptStore'
 import { useEffect, useState } from 'react'
-
-import styles from './App.module.css'
 import React from 'react'
+
+import './App.css'
 
 export type Pages =
   | typeof EN_PAGE_PROMPTS
@@ -58,7 +58,9 @@ function App() {
       instruction: newInstruction
     }
 
-    const existingPrompt = prompts.some((prompt: { id: number }) => prompt.id === promptId)
+    const existingPrompt = prompts.some(
+      (prompt: { id: number }) => prompt.id === promptId
+    )
     if (existingPrompt) {
       updatePrompt(promptId, promptData)
     } else {
@@ -77,8 +79,8 @@ function App() {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
+    <div className='wrapper'>
+      <div className='container'>
         <Header
           activeSection={activeSection}
           onSettings={handleToSettings}

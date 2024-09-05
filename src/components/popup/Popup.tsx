@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './Popup.module.css'
+
+import './Popup.css'
 
 export interface PopupProps {
   text: string
@@ -8,7 +9,7 @@ export interface PopupProps {
 export function Popup({ text, ...props }: PopupProps) {
   return (
     <>
-      <div>
+      <div className='wrapper'>
         <span>{text}</span>
       </div>
     </>

@@ -1,8 +1,8 @@
-import React from 'react'
 import { GearIcon } from './icons/GearIcon'
 import { PlusIcon } from './icons/PlusIcon'
 import { ReturnIcon } from './icons/ReturnIcon'
 import { TrashIcon } from './icons/TrashIcon'
+import React from 'react'
 
 export type IconName = 'gearIcon' | 'plusIcon' | 'trashIcon' | 'returnIcon'
 

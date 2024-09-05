@@ -3,9 +3,9 @@ import Prompt from '../../components/prompt/Prompt'
 import { EN_PAGE_EDITOR, EN_PAGE_SETTINGS } from '../../constants/text'
 import Editor from '../../sections/editor/Editor'
 import cn from 'classnames'
-
-import styles from './Main.module.css'
 import React from 'react'
+
+import './Main.css'
 
 type MainProps = {
   promptsData: Array<{ id: number; title: string; instruction: string }>
@@ -25,8 +25,8 @@ function Main({
   onSave
 }: MainProps) {
   return (
-    <main className={styles.main}>
-      <ul className={styles.promptsList}>
+    <main className='main'>
+      <ul className='promptsList'>
         {promptsData.map(prompt => (
           <Prompt
             key={prompt.id}
@@ -38,8 +38,8 @@ function Main({
       </ul>
 
       <section
-        className={cn(styles.sidebar, styles.left, {
-          [styles.leftOpen]: activeSection === EN_PAGE_EDITOR
+        className={cn('sidebar', 'left', {
+          leftOpen: activeSection === EN_PAGE_EDITOR
         })}
       >
         <Editor
@@ -53,8 +53,8 @@ function Main({
       </section>
 
       <section
-        className={cn(styles.sidebar, styles.right, {
-          [styles.rightOpen]: activeSection === EN_PAGE_SETTINGS
+        className={cn('sidebar', 'right', {
+          rightOpen: activeSection === EN_PAGE_SETTINGS
         })}
       >
         <div>Settings Content</div>

@@ -1,7 +1,7 @@
-import React from 'react'
 import { Button } from '../button/Button'
+import React from 'react'
 
-import styles from './Prompt.module.css'
+import './Prompt.css'
 
 type PromptProps = {
   id: number
@@ -11,7 +11,7 @@ type PromptProps = {
 
 function Prompt({ title, onClick }: PromptProps) {
   return (
-    <li className={styles.prompt} onClick={onClick}>
+    <li className='prompt' onClick={onClick}>
       <Button>{title}</Button>
     </li>
   )
