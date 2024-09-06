@@ -4,13 +4,19 @@ import './Popup.css'
 
 export interface PopupProps {
   text: string
+  onClose: () => void
 }
 
-export function Popup({ text, ...props }: PopupProps) {
+export function Popup({ text, onClose }: PopupProps) {
   return (
     <>
       <div className='wrapper'>
-        <span>{text}</span>
+        <div className='popup'>
+          <button className='popup-close' onClick={onClose}>
+            &times;
+          </button>
+          <span>{text}</span>
+        </div>
       </div>
     </>
   )

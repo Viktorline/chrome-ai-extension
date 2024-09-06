@@ -20,13 +20,16 @@ function renderCommandPopup(command: string) {
 
   const container = document.createElement('div')
   container.id = 'command-popup'
-  container.style.position = 'absolute'
-  container.style.left = `${mouseX}px`
-  container.style.top = `${mouseY}px`
+  container.style.position = 'fixed'
+  container.style.left = '0'
+  container.style.top = '0'
+  container.style.width = '100vw'
+  container.style.height = '100vh'
+  container.style.pointerEvents = 'none'
   document.body.appendChild(container)
 
   const root = createRoot(container)
-  root.render(<Popup text={command} />)
+  root.render(<Popup text={command} onClose={() => root.unmount()} />)
 }
 
 chrome.runtime.onMessage.addListener(async request => {
