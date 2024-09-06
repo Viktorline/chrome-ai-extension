@@ -2,12 +2,14 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ExtReloader = require('webpack-ext-reloader')
 
 module.exports = {
   mode: 'development',
   entry: {
     main: './src/index.tsx',
-    content: './src/content.tsx'
+    content: './src/content.tsx',
+    background: './src/background.ts'
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -35,6 +37,16 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'public', to: '.' }]
+    }),
+    new ExtReloader({
+      manifest: path.resolve(__dirname, 'public/manifest.json'),
+      port: 9090,
+      reloadPage: true,
+      entries: {
+        content: 'content',
+        background: 'background',
+        extensionPage: 'main'
+      }
     })
   ],
   resolve: {

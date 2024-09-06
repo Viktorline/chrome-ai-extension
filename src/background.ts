@@ -20,7 +20,7 @@ function updateContextMenu() {
     chrome.storage.local.get('commands', result => {
       const commands = result.commands || []
 
-      commands.forEach(command => {
+      commands.forEach((command: { id: any; title: any }) => {
         chrome.contextMenus.create({
           id: `command-${command.id}`,
           parentId: 'parent',
@@ -41,19 +41,26 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
 })
 
 chrome.contextMenus.onClicked.addListener(info => {
-  if (info.menuItemId.startsWith('command-')) {
-    const commandId = parseInt(info.menuItemId.replace('command-', ''), 10)
+  const menuItemId = String(info.menuItemId)
+
+  if (menuItemId.startsWith('command-')) {
+    const commandId = parseInt(menuItemId.replace('command-', ''), 10)
 
     chrome.storage.local.get('commands', result => {
-      const command = result.commands.find(cmd => cmd.id === commandId)
+      const command = result.commands.find((cmd: any) => cmd.id === commandId)
       if (command) {
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-          chrome.tabs.sendMessage(tabs[0].id, {
-            action: 'showCommandPopup',
-            command: command.instruction,
-            x: info.pageX,
-            y: info.pageY
-          })
+          const x = info.hasOwnProperty('clientX') ? (info as any).clientX : 0
+          const y = info.hasOwnProperty('clientY') ? (info as any).clientY : 0
+
+          if (tabs[0]?.id !== undefined) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+              action: 'showCommandPopup',
+              command: command.instruction,
+              x: x,
+              y: y
+            })
+          }
         })
       }
     })
