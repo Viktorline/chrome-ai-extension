@@ -2,13 +2,15 @@ import { RefObject, useEffect, useState } from 'react'
 
 export function useDrag(
   wrapperRef: RefObject<HTMLDivElement>,
-  dragButtonRef: RefObject<HTMLButtonElement>
+  dragButtonRef: RefObject<HTMLButtonElement>,
+  startTop: number,
+  startLeft: number
 ) {
-  const [position, setPosition] = useState({ top: 0, left: 0 })
+  const [position, setPosition] = useState({ top: startTop, left: startLeft })
   let startX = 0
   let startY = 0
-  let initialX = 0
-  let initialY = 0
+  let initialX = startTop
+  let initialY = startLeft
 
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {

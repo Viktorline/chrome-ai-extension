@@ -18,6 +18,7 @@
   width: 20px;
   height: 20px;
   fill: var(--color-text-dark);
+  pointer-events: none;
 }
 
 @media (hover: hover) {

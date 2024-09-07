@@ -12,11 +12,27 @@ document.addEventListener('mousemove', event => {
   mouseY = event.pageY
 })
 
+function getSelectionCoords() {
+  const selection = window.getSelection()
+
+  if (selection?.rangeCount) {
+    const range = selection.getRangeAt(0)
+    const rect = range.getBoundingClientRect()
+
+    return { top: rect.top - 100, left: rect.left + 100 }
+  }
+  return { top: mouseY, left: mouseX }
+}
+
 function renderCommandPopup(command: string) {
+  const selection = window.getSelection()
+
   const existingPopup = document.getElementById('command-popup')
   if (existingPopup) {
     existingPopup.remove()
   }
+
+  const { top, left } = getSelectionCoords()
 
   const container = document.createElement('div')
   container.id = 'command-popup'
@@ -28,12 +44,16 @@ function renderCommandPopup(command: string) {
   container.style.zIndex = '2147483646'
 
   document.body.appendChild(container)
+
   const root = createRoot(container)
+
   root.render(
     <Popup
-      text={'command'}
+      text={`${selection} ${command}`}
+      startTop={top}
+      startLeft={left}
+      // text={'command'}
       onClose={() => {
-        console.log(222)
         root.unmount()
       }}
     />
@@ -47,6 +67,6 @@ chrome.runtime.onMessage.addListener(async request => {
   }
 })
 
-renderCommandPopup('123')
+// renderCommandPopup('123')
 
 export {}
