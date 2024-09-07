@@ -52,7 +52,7 @@ chrome.contextMenus.onClicked.addListener(info => {
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
           const x = info.hasOwnProperty('clientX') ? (info as any).clientX : 0
           const y = info.hasOwnProperty('clientY') ? (info as any).clientY : 0
-
+          console.log(commandId + 'background')
           if (tabs[0]?.id !== undefined) {
             chrome.tabs.sendMessage(tabs[0].id, {
               action: 'showCommandPopup',

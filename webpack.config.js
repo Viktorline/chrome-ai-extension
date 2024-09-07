@@ -25,16 +25,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-        exclude: /node_modules/
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ],
+        include: path.resolve(__dirname, 'src')
       }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'public', to: '.' }]
     }),
