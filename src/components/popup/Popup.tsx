@@ -17,10 +17,10 @@ export function Popup({ text, onClose, startTop, startLeft }: PopupProps) {
   const dragButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const position = useDrag(wrapperRef, dragButtonRef, startTop, startLeft)
-  console.log(position)
+
   return (
     <div
-      className='draggable-wrapper'
+      className={cn('chromefastcom', 'chromefastcom-wrapper')}
       ref={wrapperRef}
       style={{
         top: `${position.top}px`,
@@ -28,27 +28,30 @@ export function Popup({ text, onClose, startTop, startLeft }: PopupProps) {
         position: 'absolute'
       }}
     >
-      <div className='popup'>
-        <ul className='controls'>
+      <div className='chromefastcom-popup'>
+        <ul className='chromefastcom-controls'>
           <li>
             <Button
               buttonRef={dragButtonRef}
-              className={cn('button-drag', 'button')}
+              className={cn(
+                'chromefastcom-button-drag',
+                'chromefastcom-button'
+              )}
               icon='dragIcon'
-              iconClassName='iconsPopup'
+              iconClassName='chromefastcom-iconsPopup'
             />
           </li>
           <li>
             <Button
-              className='button'
+              className='chromefastcom-button'
               onClick={onClose}
               icon='closeIcon'
-              iconClassName='iconsPopup'
+              iconClassName='chromefastcom-iconsPopup'
             />
           </li>
         </ul>
 
-        <span>{text}</span>
+        <span>112323{text}</span>
       </div>
     </div>
   )

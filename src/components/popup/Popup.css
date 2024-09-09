@@ -1,24 +1,48 @@
 @import '../../styles/variables.css';
-@import '../../styles/index.css';
-@import '../../styles/normalize.css';
 
-.draggable-wrapper {
+.chromefastcom * {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  box-sizing: border-box;
+}
+
+.chromefastcom {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: large;
+
+  color-scheme: light dark;
+  color: var(--color-text-dark);
+  background-color: var(--color-background-dark);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.chromefastcom ul,
+.chromefastcom ul li {
+  list-style: none;
+}
+
+.chromefastcom-wrapper {
   display: flex;
   width: 300px;
   height: 100px;
   max-height: 300px;
-  background-color: var(--color-background-dark);
   border-radius: var(--border-radius);
 }
 
-.popup {
+.chromefastcom-popup {
   position: relative;
   padding: var(--padding-small);
   padding-top: 48px;
   width: 100%;
 }
 
-.controls {
+.chromefastcom-controls {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,17 +53,17 @@
   border-bottom: 1px solid var(--color-element-dark);
 }
 
-.iconsPopup {
+.chromefastcom-iconsPopup {
   color: var(--color-text-dark);
 }
 
-.button {
+.chromefastcom-button {
   width: 30px;
   height: 30px;
   padding: 6px;
   cursor: pointer;
 }
 
-.button-drag {
+.chromefastcom-button-drag {
   cursor: move;
 }
