@@ -61,9 +61,8 @@
   width: 30px;
   height: 30px;
   padding: 6px;
-  cursor: pointer;
 }
 
 .chromefastcom-button-drag {
-  cursor: move;
+  cursor: move !important;
 }

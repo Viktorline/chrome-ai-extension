@@ -4,7 +4,9 @@ export function useDrag(
   wrapperRef: RefObject<HTMLDivElement>,
   dragButtonRef: RefObject<HTMLButtonElement>,
   startTop: number,
-  startLeft: number
+  startLeft: number,
+  boundary: { width: number; height: number },
+  popupSize: { width: number; height: number }
 ) {
   const [position, setPosition] = useState({ top: startTop, left: startLeft })
   let startX = 0
@@ -31,9 +33,16 @@ export function useDrag(
     const handleMouseMove = (e: MouseEvent) => {
       const dx = e.clientX - startX
       const dy = e.clientY - startY
+
+      let newTop = initialY + dy
+      let newLeft = initialX + dx
+
+      newTop = Math.max(0, Math.min(newTop, boundary.height - popupSize.height))
+      newLeft = Math.max(0, Math.min(newLeft, boundary.width - popupSize.width))
+
       setPosition({
-        top: initialY + dy,
-        left: initialX + dx
+        top: newTop,
+        left: newLeft
       })
     }
 

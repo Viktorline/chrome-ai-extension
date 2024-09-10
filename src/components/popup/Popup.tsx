@@ -10,13 +10,29 @@ export interface PopupProps {
   onClose: () => void
   startTop: number
   startLeft: number
+  boundary: { width: number; height: number }
 }
 
-export function Popup({ text, onClose, startTop, startLeft }: PopupProps) {
+export function Popup({
+  text,
+  onClose,
+  startTop,
+  startLeft,
+  boundary
+}: PopupProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const dragButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  const position = useDrag(wrapperRef, dragButtonRef, startTop, startLeft)
+  const popupSize = { width: 300, height: 100 }
+
+  const position = useDrag(
+    wrapperRef,
+    dragButtonRef,
+    startTop,
+    startLeft,
+    boundary,
+    popupSize
+  )
 
   return (
     <div
@@ -51,7 +67,7 @@ export function Popup({ text, onClose, startTop, startLeft }: PopupProps) {
           </li>
         </ul>
 
-        <span>112323{text}</span>
+        <span>{text}</span>
       </div>
     </div>
   )
