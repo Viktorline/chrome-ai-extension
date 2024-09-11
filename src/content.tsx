@@ -1,4 +1,5 @@
 import { Popup } from './components/popup/Popup'
+import { POPUP_SIZE_HEIGHT, POPUP_SIZE_WIDTH } from './constants/numbers'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
@@ -6,9 +7,6 @@ console.log('content.js started')
 
 let mouseX = 0
 let mouseY = 0
-
-const POPUP_WIDTH = 300
-const POPUP_HEIGHT = 100
 
 document.addEventListener('mousemove', event => {
   mouseX = event.pageX
@@ -31,8 +29,14 @@ function clampPosition(top: number, left: number) {
   const viewportWidth = window.innerWidth
   const viewportHeight = window.innerHeight
 
-  const clampedTop = Math.max(0, Math.min(top, viewportHeight - POPUP_HEIGHT))
-  const clampedLeft = Math.max(0, Math.min(left, viewportWidth - POPUP_WIDTH))
+  const clampedTop = Math.max(
+    0,
+    Math.min(top, viewportHeight - POPUP_SIZE_HEIGHT)
+  )
+  const clampedLeft = Math.max(
+    0,
+    Math.min(left, viewportWidth - POPUP_SIZE_WIDTH)
+  )
 
   return { top: clampedTop, left: clampedLeft }
 }
@@ -66,17 +70,52 @@ function renderCommandPopup(command: string) {
     height: window.innerHeight
   }
 
+  const popupSize = {
+    width: POPUP_SIZE_WIDTH,
+    height: POPUP_SIZE_HEIGHT
+  }
+
   root.render(
     <Popup
       text={`${selection} ${command}`}
       startTop={clampedTop}
       startLeft={clampedLeft}
       boundary={boundary}
+      popupSize={popupSize}
       onClose={() => {
         root.unmount()
       }}
     />
   )
+
+  window.addEventListener('resize', () => {
+    const newBoundary = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
+
+    const newClampedTop = Math.max(
+      0,
+      Math.min(clampedTop, newBoundary.height - POPUP_SIZE_HEIGHT)
+    )
+    const newClampedLeft = Math.max(
+      0,
+      Math.min(clampedLeft, newBoundary.width - POPUP_SIZE_WIDTH)
+    )
+
+    root.render(
+      <Popup
+        text={`${selection} ${command}`}
+        startTop={newClampedTop}
+        startLeft={newClampedLeft}
+        boundary={newBoundary}
+        popupSize={{ width: POPUP_SIZE_WIDTH, height: POPUP_SIZE_HEIGHT }}
+        onClose={() => {
+          root.unmount()
+        }}
+      />
+    )
+  })
 }
 
 chrome.runtime.onMessage.addListener(async request => {
@@ -86,6 +125,6 @@ chrome.runtime.onMessage.addListener(async request => {
   }
 })
 
-renderCommandPopup('123')
+// renderCommandPopup('123')
 
 export {}

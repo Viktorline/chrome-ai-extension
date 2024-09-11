@@ -11,8 +11,8 @@ export function useDrag(
   const [position, setPosition] = useState({ top: startTop, left: startLeft })
   let startX = 0
   let startY = 0
-  let initialX = startTop
-  let initialY = startLeft
+  let initialX = startLeft
+  let initialY = startTop
 
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
@@ -33,16 +33,12 @@ export function useDrag(
     const handleMouseMove = (e: MouseEvent) => {
       const dx = e.clientX - startX
       const dy = e.clientY - startY
-
-      let newTop = initialY + dy
-      let newLeft = initialX + dx
-
-      newTop = Math.max(0, Math.min(newTop, boundary.height - popupSize.height))
-      newLeft = Math.max(0, Math.min(newLeft, boundary.width - popupSize.width))
+      const newTop = initialY + dy
+      const newLeft = initialX + dx
 
       setPosition({
-        top: newTop,
-        left: newLeft
+        top: Math.max(0, Math.min(newTop, boundary.height - popupSize.height)),
+        left: Math.max(0, Math.min(newLeft, boundary.width - popupSize.width))
       })
     }
 
@@ -58,7 +54,7 @@ export function useDrag(
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [dragButtonRef, wrapperRef])
+  }, [dragButtonRef, wrapperRef, boundary, popupSize])
 
   return position
 }
