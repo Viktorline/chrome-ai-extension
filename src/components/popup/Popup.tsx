@@ -1,7 +1,9 @@
 import { useDrag } from '../../hooks/useDrag'
+import { usePromptStore } from '../../store/usePromptStore'
 import { Button } from '../button/Button'
+import { Messages } from '../messages/Messages'
 import cn from 'classnames'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import './Popup.css'
 
@@ -22,6 +24,8 @@ export function Popup({
   boundary,
   popupSize
 }: PopupProps) {
+  const { getAnswer, loading, messages } = usePromptStore()
+
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const dragButtonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -33,6 +37,10 @@ export function Popup({
     boundary,
     popupSize
   )
+
+  useEffect(() => {
+    getAnswer(text)
+  }, [text, getAnswer])
 
   return (
     <div
@@ -67,7 +75,7 @@ export function Popup({
           </li>
         </ul>
 
-        <span>{text}</span>
+        <Messages messages={messages} loading={loading} />
       </div>
     </div>
   )

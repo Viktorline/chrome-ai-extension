@@ -1,3 +1,4 @@
+import { mockApiCall } from '../utils/aiApi'
 import { create } from 'zustand'
 
 type Prompt = {
@@ -6,16 +7,28 @@ type Prompt = {
   instruction: string
 }
 
+export type Message = {
+  id: number
+  question: string
+  answer: string | null
+  error: string | null
+}
+
 type PromptState = {
   prompts: Prompt[]
+  messages: Message[]
+  loading: boolean
   loadPrompts: () => void
   addPrompt: (prompt: Prompt) => void
   updatePrompt: (id: number, updatedPrompt: Prompt) => void
   deletePrompt: (id: number) => void
+  getAnswer: (question: string) => void
 }
 
 export const usePromptStore = create<PromptState>(set => ({
   prompts: [],
+  messages: [],
+  loading: false,
 
   loadPrompts: () => {
     // const promptsFromStorage = JSON.parse(
@@ -68,5 +81,29 @@ export const usePromptStore = create<PromptState>(set => ({
       })
       return { prompts: updatedPrompts }
     })
+  },
+
+  getAnswer: async (question: string) => {
+    const messageId = Date.now()
+    set({ loading: true })
+
+    try {
+      const result = await mockApiCall(question)
+      set(state => ({
+        messages: [
+          ...state.messages,
+          { id: messageId, question, answer: result, error: null }
+        ],
+        loading: false
+      }))
+    } catch (error) {
+      set(state => ({
+        messages: [
+          ...state.messages,
+          { id: messageId, question, answer: null, error: 'Error' }
+        ],
+        loading: false
+      }))
+    }
   }
 }))

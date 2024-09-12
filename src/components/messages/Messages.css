@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.loading {
+  color: #999;
+}
+
+.message {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-question {
+  align-self: flex-end;
+  background-color: #e6f7ff;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message-answer {
+  align-self: flex-start;
+  background-color: #e6ffe6;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message-error {
+  align-self: flex-start;
+  background-color: #ffcccc;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+}
