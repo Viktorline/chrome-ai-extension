@@ -1,3 +1,4 @@
+import { POPUP_SIZE_HEIGHT, POPUP_SIZE_WIDTH } from '../../constants/numbers'
 import { useDrag } from '../../hooks/useDrag'
 import { usePromptStore } from '../../store/usePromptStore'
 import { Button } from '../button/Button'
@@ -47,9 +48,10 @@ export function Popup({
       className={cn('chromefastcom', 'chromefastcom-wrapper')}
       ref={wrapperRef}
       style={{
+        position: 'absolute',
         top: `${position.top}px`,
         left: `${position.left}px`,
-        position: 'absolute'
+        width: `${POPUP_SIZE_WIDTH}px`
       }}
     >
       <div className='chromefastcom-popup'>

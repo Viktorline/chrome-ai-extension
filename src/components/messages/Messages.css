@@ -1,39 +1,36 @@
-.wrapper {
+.chromefastcom-wrapper-messages {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  gap: var(--padding);
+  max-height: 500px;
+  overflow-y: auto;
 }
 
-.loading {
-  color: #999;
-}
-
-.message {
+.chromefastcom-messageBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding);
   margin-bottom: 15px;
+}
+
+.chromefastcom-message-wrapper {
   display: flex;
-  flex-direction: column;
+  padding: var(--padding) !important;
+  background-color: var(--color-element-dark);
+  border-radius: var(--border-radius);
+  max-width: 70%;
 }
 
-.message-question {
+.chromefastcom-question {
   align-self: flex-end;
-  background-color: #e6f7ff;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
 }
 
-.message-answer {
+.chromefastcom-answer,
+.chromefastcom-error {
   align-self: flex-start;
-  background-color: #e6ffe6;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
 }
 
-.message-error {
-  align-self: flex-start;
-  background-color: #ffcccc;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
+.chromefastcom-message {
+  overflow-wrap: break-word;
+  min-width: 0;
 }
