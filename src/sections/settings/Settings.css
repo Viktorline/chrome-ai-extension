@@ -1,0 +1,10 @@
+.settings {
+  display: grid;
+  gap: var(--padding);
+}
+
+.input {
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--color-element-dark);
+}

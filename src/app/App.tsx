@@ -23,8 +23,15 @@ export type PromptOwn = {
 }
 
 function App() {
-  const { prompts, addPrompt, loadPrompts, updatePrompt, deletePrompt } =
-    usePromptStore()
+  const {
+    apiKey,
+    prompts,
+    addPrompt,
+    setApiKey,
+    loadPrompts,
+    updatePrompt,
+    deletePrompt
+  } = usePromptStore()
   const [activeSection, setActiveSection] = useState<Pages>(EN_PAGE_PROMPTS)
   const [selectedPrompt, setSelectedPrompt] = useState<PromptOwn | null>(null)
 
@@ -89,11 +96,13 @@ function App() {
           onReturn={handleReturn}
         />
         <Main
+          apiKey={apiKey}
           promptsData={prompts}
           activeSection={activeSection}
           selectedPrompt={selectedPrompt}
           onPromptClick={handlePromptClick}
           onReturn={handleReturn}
+          setApiKey={setApiKey}
           onSave={handleSave}
         />
       </div>

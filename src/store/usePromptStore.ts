@@ -1,4 +1,4 @@
-import { mockApiCall } from '../utils/aiApi'
+import { fetchFromOpenAI } from '../utils/aiApi'
 import { create } from 'zustand'
 
 type Prompt = {
@@ -18,17 +18,31 @@ type PromptState = {
   prompts: Prompt[]
   messages: Message[]
   loading: boolean
+  apiKey: string
   loadPrompts: () => void
   addPrompt: (prompt: Prompt) => void
   updatePrompt: (id: number, updatedPrompt: Prompt) => void
   deletePrompt: (id: number) => void
   getAnswer: (question: string) => void
+  setApiKey: (key: string) => void
+  removeApiKey: () => void
 }
 
-export const usePromptStore = create<PromptState>(set => ({
+export const usePromptStore = create<PromptState>((set, get) => ({
+  apiKey: '',
   prompts: [],
   messages: [],
   loading: false,
+
+  setApiKey: (key: string) => {
+    set({ apiKey: key })
+    chrome.storage.local.set({ apiKey: key })
+  },
+
+  removeApiKey: () => {
+    set({ apiKey: '' })
+    chrome.storage.local.remove('apiKey')
+  },
 
   loadPrompts: () => {
     // const promptsFromStorage = JSON.parse(
@@ -85,10 +99,25 @@ export const usePromptStore = create<PromptState>(set => ({
 
   getAnswer: async (question: string) => {
     const messageId = Date.now()
+    const { apiKey } = get()
+    if (!apiKey) {
+      set(state => ({
+        messages: [
+          ...state.messages,
+          {
+            id: messageId,
+            question,
+            answer: null,
+            error: 'API-key is not found'
+          }
+        ]
+      }))
+      return
+    }
     set({ loading: true })
 
     try {
-      const result = await mockApiCall(question)
+      const result = await fetchFromOpenAI(question, apiKey)
       set(state => ({
         messages: [
           ...state.messages,

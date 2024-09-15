@@ -8,34 +8,34 @@ interface MessagesProps {
   messages: Message[]
   loading: boolean
 }
-const mockData = [
-  {
-    id: 1726195380907,
-    question:
-      '12312313131232131232131231231232132132131232131232131231321321313213',
-    answer:
-      '12312313131232131232131231231232132132131232131232131231321321313213 12312313131232131232131231231232132132131232131232131231321321313213',
-    error: null
-  },
-  {
-    id: 1726195380907,
-    question: '123',
-    answer: '123',
-    error: null
-  },
-  {
-    id: 1726195380907,
-    question: '123',
-    answer: '123',
-    error: null
-  },
-  {
-    id: 1726195380907,
-    question: '123',
-    answer: '123',
-    error: null
-  }
-]
+// const mockData = [
+//   {
+//     id: 1726195380907,
+//     question:
+//       '12312313131232131232131231231232132132131232131232131231321321313213',
+//     answer:
+//       '12312313131232131232131231231232132132131232131232131231321321313213 12312313131232131232131231231232132132131232131232131231321321313213',
+//     error: null
+//   },
+//   {
+//     id: 1726195380907,
+//     question: '123',
+//     answer: '123',
+//     error: null
+//   },
+//   {
+//     id: 1726195380907,
+//     question: '123',
+//     answer: '123',
+//     error: null
+//   },
+//   {
+//     id: 1726195380907,
+//     question: '123',
+//     answer: '123',
+//     error: null
+//   }
+// ]
 
 export function Messages({ messages, loading }: MessagesProps) {
   console.log(messages)
@@ -45,7 +45,7 @@ export function Messages({ messages, loading }: MessagesProps) {
         <div className='chromefastcom-loading'>Loading...</div>
       ) : (
         <>
-          {mockData.map((msg, index) => (
+          {messages.map((msg, index) => (
             <div key={index} className='chromefastcom-messageBlock'>
               <>
                 <div

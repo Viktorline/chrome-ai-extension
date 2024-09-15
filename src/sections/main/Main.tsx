@@ -2,6 +2,7 @@ import { Pages, PromptOwn } from '../../app/App'
 import Prompt from '../../components/prompt/Prompt'
 import { EN_PAGE_EDITOR, EN_PAGE_SETTINGS } from '../../constants/text'
 import Editor from '../../sections/editor/Editor'
+import Settings from '../settings/Settings'
 import cn from 'classnames'
 import React from 'react'
 
@@ -11,16 +12,20 @@ type MainProps = {
   promptsData: Array<{ id: number; title: string; instruction: string }>
   activeSection: Pages
   selectedPrompt: PromptOwn | null
+  apiKey: string
   onPromptClick: (prompt: PromptOwn) => void
   onSave: (id: number, newTitle: string, newInstruction: string) => void
   onReturn: () => void
+  setApiKey: (newApiKey: string) => void
 }
 
 function Main({
+  apiKey,
   promptsData,
   activeSection,
   selectedPrompt,
   onPromptClick,
+  setApiKey,
   onReturn,
   onSave
 }: MainProps) {
@@ -57,7 +62,7 @@ function Main({
           rightOpen: activeSection === EN_PAGE_SETTINGS
         })}
       >
-        <div>Settings Content</div>
+        <Settings apiKey={apiKey} setApiKey={setApiKey} />
       </section>
     </main>
   )

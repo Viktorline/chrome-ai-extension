@@ -125,6 +125,4 @@ chrome.runtime.onMessage.addListener(async request => {
   }
 })
 
-renderCommandPopup('123')
-
 export {}
