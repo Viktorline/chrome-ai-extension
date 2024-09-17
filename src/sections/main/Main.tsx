@@ -16,7 +16,7 @@ type MainProps = {
   onPromptClick: (prompt: PromptOwn) => void
   onSave: (id: number, newTitle: string, newInstruction: string) => void
   onReturn: () => void
-  setApiKey: (newApiKey: string) => void
+  setOpenAiApiKey: (newApiKey: string) => void
 }
 
 function Main({
@@ -25,7 +25,7 @@ function Main({
   activeSection,
   selectedPrompt,
   onPromptClick,
-  setApiKey,
+  setOpenAiApiKey,
   onReturn,
   onSave
 }: MainProps) {
@@ -62,7 +62,7 @@ function Main({
           rightOpen: activeSection === EN_PAGE_SETTINGS
         })}
       >
-        <Settings apiKey={apiKey} setApiKey={setApiKey} />
+        <Settings apiKey={apiKey} setOpenAiApiKey={setOpenAiApiKey} />
       </section>
     </main>
   )

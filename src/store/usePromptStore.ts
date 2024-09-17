@@ -1,4 +1,5 @@
 import { fetchFromOpenAI } from '../utils/aiApi'
+import OpenAI from 'openai'
 import { create } from 'zustand'
 
 type Prompt = {
@@ -18,29 +19,35 @@ type PromptState = {
   prompts: Prompt[]
   messages: Message[]
   loading: boolean
+  openAi: OpenAI | null
   apiKey: string
   loadPrompts: () => void
   addPrompt: (prompt: Prompt) => void
   updatePrompt: (id: number, updatedPrompt: Prompt) => void
   deletePrompt: (id: number) => void
   getAnswer: (question: string) => void
-  setApiKey: (key: string) => void
+  setOpenAiApiKey: (key: string) => void
   removeApiKey: () => void
 }
 
 export const usePromptStore = create<PromptState>((set, get) => ({
+  openAi: null,
   apiKey: '',
   prompts: [],
   messages: [],
   loading: false,
 
-  setApiKey: (key: string) => {
-    set({ apiKey: key })
+  setOpenAiApiKey: (key: string) => {
+    const openAi = new OpenAI({
+      apiKey: key,
+      dangerouslyAllowBrowser: true
+    })
+    set({ apiKey: key, openAi })
     chrome.storage.local.set({ apiKey: key })
   },
 
   removeApiKey: () => {
-    set({ apiKey: '' })
+    set({ apiKey: '', openAi: null })
     chrome.storage.local.remove('apiKey')
   },
 
@@ -99,7 +106,7 @@ export const usePromptStore = create<PromptState>((set, get) => ({
 
   getAnswer: async (question: string) => {
     const messageId = Date.now()
-    const { apiKey } = get()
+    const { apiKey, openAi } = get()
     if (!apiKey) {
       set(state => ({
         messages: [
@@ -114,10 +121,25 @@ export const usePromptStore = create<PromptState>((set, get) => ({
       }))
       return
     }
+    if (!openAi) {
+      set(state => ({
+        messages: [
+          ...state.messages,
+          {
+            id: messageId,
+            question,
+            answer: null,
+            error: 'OpenAI instance is not initialized'
+          }
+        ]
+      }))
+      return
+    }
+
     set({ loading: true })
 
     try {
-      const result = await fetchFromOpenAI(question, apiKey)
+      const result = await fetchFromOpenAI(question, openAi)
       set(state => ({
         messages: [
           ...state.messages,

@@ -27,7 +27,7 @@ function App() {
     apiKey,
     prompts,
     addPrompt,
-    setApiKey,
+    setOpenAiApiKey,
     loadPrompts,
     updatePrompt,
     deletePrompt
@@ -102,7 +102,7 @@ function App() {
           selectedPrompt={selectedPrompt}
           onPromptClick={handlePromptClick}
           onReturn={handleReturn}
-          setApiKey={setApiKey}
+          setOpenAiApiKey={setOpenAiApiKey}
           onSave={handleSave}
         />
       </div>

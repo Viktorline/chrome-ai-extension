@@ -3,7 +3,25 @@
   gap: var(--padding);
 }
 
-.input {
+.setting {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--padding);
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--color-element-dark);
+}
+
+.inputSettings {
+  width: 100%;
   padding: var(--padding);
   border-radius: var(--border-radius);
   background-color: var(--color-element-dark);

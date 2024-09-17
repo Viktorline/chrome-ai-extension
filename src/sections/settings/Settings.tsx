@@ -6,29 +6,33 @@ import './Settings.css'
 
 type SettingsProps = {
   apiKey: string
-  setApiKey: (newApi: string) => void
+  setOpenAiApiKey: (newApi: string) => void
 }
 
-function Settings({ apiKey, setApiKey }: SettingsProps) {
+function Settings({ apiKey, setOpenAiApiKey }: SettingsProps) {
   const [editApiKey, setEditApiKey] = useState(apiKey || '')
 
   const isModified = editApiKey !== apiKey
 
   const handleSave = () => {
-    setApiKey(editApiKey)
+    setOpenAiApiKey(editApiKey)
+    setEditApiKey(editApiKey)
   }
 
   return (
     <div className='settings'>
-      <input
-        id='edit-api-key'
-        name='apiKey'
-        className='input'
-        type='text'
-        value={editApiKey}
-        onChange={e => setEditApiKey(e.target.value)}
-        placeholder='Enter OpenAI API Key'
-      />
+      <div className='setting'>
+        <div className='name'>OpenAi</div>
+        <input
+          id='edit-api-key'
+          name='apiKey'
+          className='inputSettings'
+          type='text'
+          value={editApiKey}
+          onChange={e => setEditApiKey(e.target.value)}
+          placeholder='Enter OpenAI API Key'
+        />
+      </div>
       {isModified && <Button onClick={handleSave}>Save API Key</Button>}
     </div>
   )

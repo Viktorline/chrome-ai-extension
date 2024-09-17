@@ -1,3 +1,5 @@
+import OpenAI from 'openai'
+
 export const mockApiCall = async (question: string): Promise<string> => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -6,32 +8,18 @@ export const mockApiCall = async (question: string): Promise<string> => {
   })
 }
 
-export const fetchFromOpenAI = async (
-  question: string,
-  apiKey: string
-): Promise<string> => {
+export const fetchFromOpenAI = async (question: string, openAi: OpenAI) => {
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: question }]
-      })
+    const response = await openAi.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: question }]
     })
-
-    if (!response.ok) {
-      throw new Error('Error')
-    }
-
-    const data = await response.json()
-    return data.choices[0].message.content
+    console.log(response)
+    const answer = response.choices?.[0]?.message?.content || null
+    return answer
   } catch (error) {
     console.error('Error:', error)
-    throw error
+    return null
   }
 }
 
