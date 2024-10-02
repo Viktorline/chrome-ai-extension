@@ -52,26 +52,16 @@ export const usePromptStore = create<PromptState>((set, get) => ({
   },
 
   loadPrompts: () => {
-    // const promptsFromStorage = JSON.parse(
-    //   localStorage.getItem('prompts') || '[]'
-    // )
-    // set({ prompts: promptsFromStorage })
     chrome.storage.local.get('commands', result => {
       const commands = result.commands || []
       set({ prompts: commands })
-      // alert('loaded from Chrome: ' + JSON.stringify(commands))
     })
   },
 
   addPrompt: (prompt: Prompt) => {
     set(state => {
       const updatedPrompts = [...state.prompts, prompt]
-
-      // localStorage.setItem('prompts', JSON.stringify(updatedPrompts))
-
-      chrome.storage.local.set({ commands: updatedPrompts }, () => {
-        // alert('Command added to Chrome storage:' + prompt)
-      })
+      chrome.storage.local.set({ commands: updatedPrompts }, () => {})
       return { prompts: updatedPrompts }
     })
   },
@@ -81,12 +71,7 @@ export const usePromptStore = create<PromptState>((set, get) => ({
       const updatedPrompts = state.prompts.map(prompt =>
         prompt.id === id ? updatedPrompt : prompt
       )
-
-      // localStorage.setItem('prompts', JSON.stringify(updatedPrompts))
-
-      chrome.storage.local.set({ commands: updatedPrompts }, () => {
-        // alert('Command updated in Chrome storage:' + updatedPrompt)
-      })
+      chrome.storage.local.set({ commands: updatedPrompts }, () => {})
       return { prompts: updatedPrompts }
     })
   },
@@ -95,11 +80,7 @@ export const usePromptStore = create<PromptState>((set, get) => ({
     set(state => {
       const updatedPrompts = state.prompts.filter(prompt => prompt.id !== id)
 
-      // localStorage.setItem('prompts', JSON.stringify(updatedPrompts))
-
-      chrome.storage.local.set({ commands: updatedPrompts }, () => {
-        // alert('Command deleted from Chrome storage:' + id)
-      })
+      chrome.storage.local.set({ commands: updatedPrompts }, () => {})
       return { prompts: updatedPrompts }
     })
   },
